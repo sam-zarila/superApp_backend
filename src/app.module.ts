@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MarketplaceModule } from './marketplace/marketplace.module';
+import { Marketplace } from './marketplace/entities/marketplace.entity';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { MarketplaceModule } from './marketplace/marketplace.module';
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [],
+      entities: [Marketplace],
       synchronize: true,
 
     }),
