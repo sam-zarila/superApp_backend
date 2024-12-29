@@ -15,6 +15,13 @@ export class MarketplaceService {
   }
 
   findMarketPlaceItem() :Promise<Marketplace[]>{
-     return 
+     return this.marketplaceRepository.find()
+  }
+
+  async updateMarketPlaceItem(id:number, updatedData: Partial<Marketplace>){
+
+    await this.marketplaceRepository.update(id, updatedData)
+    return this.marketplaceRepository.findOneBy({id})
+
   }
 }
