@@ -1,26 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMarketplaceDto } from './dto/create-marketplace.dto';
 import { UpdateMarketplaceDto } from './dto/update-marketplace.dto';
+import { Marketplace } from './entities/marketplace.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class MarketplaceService {
-  create(createMarketplaceDto: CreateMarketplaceDto) {
-    return 'This action adds a new marketplace';
-  }
+  constructor( @InjectRepository(Marketplace) private marketplaceRepository:Repository<Marketplace> ){}
 
-  findAll() {
-    return `This action returns all marketplace`;
-  }
+  createMarketPlaceItem(marketplaceItem:Marketplace){
 
-  findOne(id: number) {
-    return `This action returns a #${id} marketplace`;
-  }
-
-  update(id: number, updateMarketplaceDto: UpdateMarketplaceDto) {
-    return `This action updates a #${id} marketplace`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} marketplace`;
+    return this.marketplaceRepository.save(marketplaceItem)
   }
 }
