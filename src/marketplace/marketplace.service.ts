@@ -13,4 +13,8 @@ export class MarketplaceService {
 
     return this.marketplaceRepository.save(marketplaceItem)
   }
+
+  findMarketPlaceItem() :Promise<Marketplace[]>{
+     return 
+  }
 }
