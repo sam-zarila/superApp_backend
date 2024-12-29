@@ -24,4 +24,9 @@ export class MarketplaceService {
     return this.marketplaceRepository.findOneBy({id})
 
   }
+  async removeMarketPlaceItem(id:number) :Promise<void>{
+    await this.marketplaceRepository.delete(id)
+    
+
+  }
 }
