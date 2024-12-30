@@ -15,7 +15,9 @@ export class LatestarrivalsService {
 
     return this.latestArrivalsRepository.save(LatestArrival)
 
-
+  }
+  findLatestArrivalItem() :Promise<Latestarrival[]>{
+    return this.latestArrivalsRepository.find()
   }
   
 
