@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/
 import { MarketplaceService } from './marketplace.service';
 import { CreateMarketplaceDto } from './dto/create-marketplace.dto';
 import { UpdateMarketplaceDto } from './dto/update-marketplace.dto';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Marketplace } from './entities/marketplace.entity';
 
 @ApiTags('MarketPlace Endpoint')
@@ -28,5 +28,22 @@ export class MarketplaceController {
     return this.marketplaceservice.findMarketPlaceItem()
     
   }
-  @Put()
+ @Put(':id')
+ @ApiOperation({summary:"updating the marketpalce item"})
+ @ApiBody({type:Marketplace})
+ @ApiParam({ name:'id', description:'he ID of the property', type:Number})
+
+ updateMarketPlaceItem(@Param(':id') id:number ,@Body() updatedData:Partial<Marketplace>){
+  return  this.marketplaceservice.updateMarketPlaceItem(id, updatedData)
+ }
+
+ @Delete(':id')
+ @ApiOperation({summary:"updating the marketpalce item"})
+ @ApiBody({type:Marketplace})
+ @ApiParam({ name:'id', description:'he ID of the property', type:Number})
+
+ async removeMarketPlaceItem(@Param(":id") id:number){
+    await this.marketplaceservice.removeMarketPlaceItem(id)
+    return this.marketplaceservice.removeMarketPlaceItem(id)
+ }
 }
