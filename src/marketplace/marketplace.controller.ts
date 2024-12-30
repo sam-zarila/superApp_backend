@@ -31,9 +31,9 @@ export class MarketplaceController {
  @Put(':id')
  @ApiOperation({summary:"updating the marketpalce item"})
  @ApiBody({type:Marketplace})
- @ApiParam({ name:'id', description:'he ID of the property', type:Number})
+ @ApiParam({ name:'id', description:'the ID of the property', type:Number})
 
- updateMarketPlaceItem(@Param(':id') id:number ,@Body() updatedData:Partial<Marketplace>){
+ updateMarketPlaceItem(@Param('id') id:number ,@Body() updatedData:Partial<Marketplace>){
   return  this.marketplaceservice.updateMarketPlaceItem(id, updatedData)
  }
 
@@ -42,7 +42,7 @@ export class MarketplaceController {
  @ApiBody({type:Marketplace})
  @ApiParam({ name:'id', description:'he ID of the property', type:Number})
 
- async removeMarketPlaceItem(@Param(":id") id:number){
+ async removeMarketPlaceItem(@Param("id") id:number){
     await this.marketplaceservice.removeMarketPlaceItem(id)
     return this.marketplaceservice.removeMarketPlaceItem(id)
  }
