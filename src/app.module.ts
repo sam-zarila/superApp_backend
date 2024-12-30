@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MarketplaceModule } from './marketplace/marketplace.module';
 import { Marketplace } from './marketplace/entities/marketplace.entity';
+import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 
 @Module({
   imports: [
@@ -18,7 +19,9 @@ import { Marketplace } from './marketplace/entities/marketplace.entity';
       synchronize: true,
 
     }),
-    MarketplaceModule
+    MarketplaceModule,
+    LatestarrivalsModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],
