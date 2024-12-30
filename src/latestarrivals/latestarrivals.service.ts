@@ -1,5 +1,6 @@
 
 
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Latestarrival } from './entities/latestarrival.entity';
@@ -20,5 +21,16 @@ export class LatestarrivalsService {
     return this.latestArrivalsRepository.find()
   }
   
+  async UpdateLatestArrivaltem( id:number, updatedData:Partial<Latestarrival>){
+    await this.latestArrivalsRepository.update(id,updatedData)
+
+    return this.latestArrivalsRepository.findOneBy({id})
+  }
+
+  async removeLatestArrivallItem(id:number):Promise<void>{
+
+    await this.latestArrivalsRepository.delete({id})
+
+  }
 
 }
