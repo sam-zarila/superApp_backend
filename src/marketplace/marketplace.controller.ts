@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { MarketplaceService } from './marketplace.service';
 import { CreateMarketplaceDto } from './dto/create-marketplace.dto';
 import { UpdateMarketplaceDto } from './dto/update-marketplace.dto';
@@ -21,11 +21,12 @@ export class MarketplaceController {
   }
   @Get()
   @ApiOperation({summary: 'retrieve marketplaceitems'})
-  @ApiResponse({status:201, description:"marketplace retrieved", type:CreateMarketplaceDto})
+  @ApiResponse({status:201, description:"marketplace retrieved"})
 
   getMarketPlaceItems() :Promise<CreateMarketplaceDto[]>{
 
     return this.marketplaceservice.findMarketPlaceItem()
     
   }
+  @Put()
 }
