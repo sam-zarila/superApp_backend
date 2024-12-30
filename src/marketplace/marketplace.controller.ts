@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MarketplaceService } from './marketplace.service';
 import { CreateMarketplaceDto } from './dto/create-marketplace.dto';
 import { UpdateMarketplaceDto } from './dto/update-marketplace.dto';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Marketplace } from './entities/marketplace.entity';
 
 @ApiTags('MarketPlace Endpoint')
@@ -20,4 +20,12 @@ export class MarketplaceController {
 
   }
   @Get()
+  @ApiOperation({summary: 'retrieve marketplaceitems'})
+  @ApiResponse({status:201, description:"marketplace retrieved", type:CreateMarketplaceDto})
+
+  getMarketPlaceItems() :Promise<CreateMarketplaceDto[]>{
+
+    return this.marketplaceservice.findMarketPlaceItem()
+    
+  }
 }

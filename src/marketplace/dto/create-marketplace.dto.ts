@@ -12,5 +12,5 @@ export class CreateMarketplaceDto {
     name:string
 
     @ApiProperty()
-    price:string
+    price:number
 }
