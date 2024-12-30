@@ -1,1 +1,3 @@
-export class CreateLatestarrivalDto {}
+export class CreateLatestarrivalDto {
+    
+}
