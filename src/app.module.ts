@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MarketplaceModule } from './marketplace/marketplace.module';
 import { Marketplace } from './marketplace/entities/marketplace.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
+import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace],
+      entities: [Marketplace, Latestarrival],
       synchronize: true,
 
     }),
