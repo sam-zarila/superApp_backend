@@ -25,5 +25,10 @@ export class Marketplace {
     @IsNumber()
     price:number
 
+    @ApiProperty({description: "description of the item"})
+    @Column()
+    @IsString()
+    description: string;
+
 
 }
