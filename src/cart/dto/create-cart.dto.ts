@@ -7,6 +7,9 @@ export class CreateCartDto {
   @ApiProperty({ description: 'image of the item' })
   item: number;
 
+  @ApiProperty({description:"quantity of the item"})
+  quantity: number
+
   @ApiProperty({ description: 'image of the item' })
   image: string;
 

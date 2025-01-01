@@ -13,7 +13,9 @@ export class CartService {
   ){}
 
   async addToCart( addTocart:CreateCartDto) :Promise<{message:string}>{
-    const{}
+    const{item, quantity, image, name, price, description} = addTocart;
+
+    console.log( 'adding to cart:',{ item, quantity, image, name, price, description})
 
   }
 }
