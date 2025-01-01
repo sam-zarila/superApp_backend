@@ -7,6 +7,7 @@ import { Marketplace } from './marketplace/entities/marketplace.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { CartModule } from './cart/cart.module';
+import { cartEntity } from './cart/entities/cart.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { CartModule } from './cart/cart.module';
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, Latestarrival],
+      entities: [Marketplace, Latestarrival,cartEntity],
       synchronize: true,
 
     }),
