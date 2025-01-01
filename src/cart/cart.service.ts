@@ -36,5 +36,40 @@ export class CartService {
     }
 
   }
+
+  async getCartItems(): Promise<cartEntity[]>{
+
+    try {
+      const cartItems = await this.cartRepository.find();
+      return cartItems;
+      
+    } catch (error) {
+      console.error('error fetching cart items',error);
+      throw new Error('could not fetch cart items');
+      
+    }
+
+  }
+
+  async deleteFromCart(itemId:number): Promise<{message:string}>{
+
+    try {
+
+      const item = await this.cartRepository.findOne({where : {id:itemId}})
+
+      if (!item) {
+
+        throw new Error('item not found')
+        
+      }
+
+      await this.cartRepository.remove(item)
+      return {message : 'item removed form the cart'}
+      
+    } catch (error) {
+      
+    }
+
+  }
   
 }
