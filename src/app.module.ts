@@ -6,6 +6,7 @@ import { MarketplaceModule } from './marketplace/marketplace.module';
 import { Marketplace } from './marketplace/entities/marketplace.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
     }),
     MarketplaceModule,
     LatestarrivalsModule,
+    CartModule,
     
   ],
   controllers: [AppController],
