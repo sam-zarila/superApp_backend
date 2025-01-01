@@ -17,5 +17,24 @@ export class CartService {
 
     console.log( 'adding to cart:',{ item, quantity, image, name, price, description})
 
+    try {
+      const existingItem = await this.cartRepository.findOne({where:{item}});
+
+      if(existingItem){
+        existingItem.quantity += quantity;
+        await this.cartRepository.save(existingItem)
+        return {message :"Item quantity updated"};
+      }
+
+      const newItem = this.cartRepository.create({item, quantity, image, name, price,description});
+      await this.cartRepository.save(newItem);
+      return {message:'item added to cart'};
+      
+    } catch (error) {
+      console.error('Error adding item to cart:', error)
+      
+    }
+
   }
+  
 }
