@@ -10,6 +10,10 @@ export class cartEntity {
 
         @Column()
         item:number
+
+        @Column()
+        @ApiProperty()
+        quantity: number;
     
         @ApiProperty({description:"image of the item"})
         @Column()
