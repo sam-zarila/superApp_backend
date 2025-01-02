@@ -8,6 +8,7 @@ import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { CartModule } from './cart/cart.module';
 import { cartEntity } from './cart/entities/cart.entity';
+import { FirebaseService } from './firebase/services/firebase/firebase.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { cartEntity } from './cart/entities/cart.entity';
     
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FirebaseService],
 })
 export class AppModule {}
