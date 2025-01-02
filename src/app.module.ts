@@ -21,6 +21,9 @@ import { Marketplace } from './entities/marketplace.entity';
 import { SellersApplicationForm } from './entities/sellersApplication.Entity';
 import { Orders } from './entities/Order.Entity';
 import { randomproductsModule } from './random products/randomproducts.modules';
+import { CartModule } from './cart/cart.module';
+import { CartController } from './cart/cart.controller';
+import { cartEntity } from './entities/cart.entity';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -37,16 +40,17 @@ dotenv.config();
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Marketplace, SellersApplicationForm, Orders],
+      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity],
       synchronize: true,
     }),
     MarketplaceModule,
     OrdersModule,
     randomproductsModule,
+    CartModule,
     SellersModule, // Ensure this is imported
     DriversModule,
   ],
-  controllers: [AppController, SellersController, DriversController, OrdersController],
+  controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],
 })
 export class AppModule {}
