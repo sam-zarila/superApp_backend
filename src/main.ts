@@ -5,10 +5,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-<<<<<<< HEAD
+
   app.enableCors(); 
   // Swagger configuration
-=======
 
   // Apply helmet middleware for security
   app.use(helmet());
@@ -28,7 +27,6 @@ async function bootstrap() {
   
 
   // Swagger setup for API documentation
->>>>>>> faf1ce7 (db online)
   const config = new DocumentBuilder()
     .setTitle('uniConnectMalawi')
     .setDescription('APIs for university business connections')

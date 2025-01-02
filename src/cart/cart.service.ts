@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { cartEntity } from './entities/cart.entity';
+import { cartEntity } from '../entities/cart.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

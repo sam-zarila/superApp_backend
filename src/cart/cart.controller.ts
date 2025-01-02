@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpS
 import { CartService } from './cart.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
-import { cartEntity } from './entities/cart.entity';
+import { cartEntity } from '../entities/cart.entity';
 
 
 @ApiTags('Cart Apis')

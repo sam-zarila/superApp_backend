@@ -3,7 +3,7 @@ import { MarketplaceService } from './marketplace.service';
 import { CreateMarketplaceDto } from './dto/create-marketplace.dto';
 import { UpdateMarketplaceDto } from './dto/update-marketplace.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Marketplace } from './entities/marketplace.entity';
+import { Marketplace } from '../entities/marketplace.entity';
 
 @ApiTags('MarketPlace Endpoint')
 @Controller('marketplace')
