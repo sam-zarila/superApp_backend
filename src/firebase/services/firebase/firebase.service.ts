@@ -14,4 +14,7 @@ export class FirebaseService {
             
         });
     }
+    async verifyToken(token: string): Promise<admin.auth.DecodedIdToken>{
+        return this.FirebaseApp.auth().verifyIdToken(token);
+    }
 }
