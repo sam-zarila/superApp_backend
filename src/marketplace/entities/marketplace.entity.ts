@@ -25,10 +25,17 @@ export class Marketplace {
     @IsNumber()
     price:number
 
+<<<<<<< HEAD:src/marketplace/entities/marketplace.entity.ts
     @ApiProperty({description: "description of the item"})
     @Column()
     @IsString()
     description: string;
+=======
+    @ApiProperty({description:"name of the item"})
+    @Column()
+    @IsString()
+    description:string
+>>>>>>> faf1ce7 (db online):src/entities/marketplace.entity.ts
 
 
 }
