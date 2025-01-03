@@ -1,20 +1,24 @@
-
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 
-
-
 @Injectable()
 export class FirebaseService {
-    private FirebaseApp:admin.app.App
+  constructor() {
+    // Check if Firebase is already initialized to avoid the error
+    if (!admin.apps.length) {
+      admin.initializeApp({
+        credential: admin.credential.applicationDefault(),
+      });
+    }
+  }
 
-    constructor(){
-        this.FirebaseApp = admin.initializeApp({
-            credential: admin.credential.applicationDefault()
-            
-        });
+  // Method to verify Firebase ID token
+  async verifyToken(idToken: string) {
+    try {
+      const decodedToken = await admin.auth().verifyIdToken(idToken);
+      return decodedToken;
+    } catch (error) {
+      throw new Error('Invalid token');
     }
-    async verifyToken(token: string): Promise<admin.auth.DecodedIdToken>{
-        return this.FirebaseApp.auth().verifyIdToken(token);
-    }
+  }
 }
