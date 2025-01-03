@@ -1,62 +1,72 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { 
+  Controller, 
+  Get, 
+  Post, 
+  Body, 
+  Param, 
+  Delete, 
+  HttpException, 
+  HttpStatus, 
+  Req, 
+  UseGuards 
+} from '@nestjs/common';
 import { CartService } from './cart.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { cartEntity } from './entities/cart.entity';
+import { FirebaseAuthGuard } from '../firebase/firebase.authGuard'; 
 
-
-@ApiTags('Cart Apis')
+@ApiTags('Cart APIs')
 @Controller('cart')
+@UseGuards(FirebaseAuthGuard)
 export class CartController {
+  constructor(private readonly cartService: CartService) {}
 
-  constructor(
-    private CartService:CartService
-  ){}
-
+  // Add item to the user's cart
   @Post()
-  async addTocart(@Body() addTocart:CreateCartDto){
-  
-     try {
-      const result = await this.CartService.addToCart(addTocart)
+  async addToCart(@Req() request: any, @Body() addToCartDto: CreateCartDto) {
+    const userId = request.user.uid; 
+    try {
+      const result = await this.cartService.addToCart(userId, addToCartDto);
       return result;
-      
-     } catch (error) {
-
-      throw new HttpException('could not add item to cart',HttpStatus.BAD_REQUEST);
-      
-     }
-
-  }
-  @Get()
-  async getCartItems():Promise<cartEntity[]>{
-    try {
-      const cartItems = await this.CartService.getCartItems();
-      return cartItems
-      
     } catch (error) {
-
-      throw new HttpException('coulld not fetch cart items', HttpStatus.BAD_REQUEST)
-      
+      throw new HttpException(
+        'Could not add item to cart',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
-  @Delete(':id')
-  async deleteFromCart(@Param('id') id:number){
 
+  
+  @Get()
+  async getCartItems(@Req() request: any): Promise<cartEntity[]> {
+    const userId = request.user.uid; 
     try {
-      const  result = await this.CartService.deleteFromCart(id)
-      return result
-      
-    }  catch (error) {
-      if(error.status === HttpStatus.NOT_FOUND){
-
-        throw new HttpException('Item not found in cart', HttpStatus.NOT_FOUND);
-
-      }
-
-      throw new HttpException('Could not delete item from cart', HttpStatus.BAD_REQUEST);
-      
+      const cartItems = await this.cartService.getCartItems(userId);
+      return cartItems;
+    } catch (error) {
+      throw new HttpException(
+        'Could not fetch cart items',
+        HttpStatus.BAD_REQUEST,
+      );
     }
-
   }
 
+  
+  @Delete(':id')
+  async deleteFromCart(@Req() request: any, @Param('id') id: number) {
+    const userId = request.user.uid; 
+    try {
+      const result = await this.cartService.deleteFromCart(userId, id);
+      return result;
+    } catch (error) {
+      if (error.status === HttpStatus.NOT_FOUND) {
+        throw new HttpException('Item not found in cart', HttpStatus.NOT_FOUND);
+      }
+      throw new HttpException(
+        'Could not delete item from cart',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
 }

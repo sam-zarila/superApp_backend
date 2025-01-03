@@ -46,7 +46,7 @@ export class CartService {
     }
   }
 
-  // Remove an item from the user's cart
+  
   async deleteFromCart(userId: string, itemId: number): Promise<{ message: string }> {
     try {
       const item = await this.cartRepository.findOne({ where: { id: itemId, userId } });
