@@ -7,69 +7,59 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class CartService {
+  constructor(
+    @InjectRepository(cartEntity) private readonly cartRepository: Repository<cartEntity>,
+  ) {}
 
-  constructor (
-   @InjectRepository(cartEntity) private readonly cartRepository:Repository<cartEntity>
-  ){}
+  // Add item to cart tied to a specific user
+  async addToCart(userId: string, addToCart: CreateCartDto): Promise<{ message: string }> {
+    const { item, quantity, image, name, price, description } = addToCart;
 
-  async addToCart( addTocart:CreateCartDto) :Promise<{message:string}>{
-    const{item, quantity, image, name, price, description} = addTocart;
-
-    console.log( 'adding to cart:',{ item, quantity, image, name, price, description})
+    console.log('Adding to cart:', { userId, item, quantity, image, name, price, description });
 
     try {
-      const existingItem = await this.cartRepository.findOne({where:{item}});
+      const existingItem = await this.cartRepository.findOne({ where: { item, userId } });
 
-      if(existingItem){
+      if (existingItem) {
         existingItem.quantity += quantity;
-        await this.cartRepository.save(existingItem)
-        return {message :"Item quantity updated"};
+        await this.cartRepository.save(existingItem);
+        return { message: 'Item quantity updated' };
       }
 
-      const newItem = this.cartRepository.create({item, quantity, image, name, price,description});
+      const newItem = this.cartRepository.create({ item, quantity, image, name, price, description, userId });
       await this.cartRepository.save(newItem);
-      return {message:'item added to cart'};
-      
+      return { message: 'Item added to cart' };
     } catch (error) {
-      console.error('Error adding item to cart:', error)
-      
+      console.error('Error adding item to cart:', error);
+      throw new Error('Could not add item to cart');
     }
-
   }
 
-  async getCartItems(): Promise<cartEntity[]>{
-
+  // Get all cart items for a specific user
+  async getCartItems(userId: string): Promise<cartEntity[]> {
     try {
-      const cartItems = await this.cartRepository.find();
+      const cartItems = await this.cartRepository.find({ where: { userId } });
       return cartItems;
-      
     } catch (error) {
-      console.error('error fetching cart items',error);
-      throw new Error('could not fetch cart items');
-      
+      console.error('Error fetching cart items:', error);
+      throw new Error('Could not fetch cart items');
     }
-
   }
 
-  async deleteFromCart(itemId:number): Promise<{message:string}>{
-
+  // Remove an item from the user's cart
+  async deleteFromCart(userId: string, itemId: number): Promise<{ message: string }> {
     try {
-
-      const item = await this.cartRepository.findOne({where : {id:itemId}})
+      const item = await this.cartRepository.findOne({ where: { id: itemId, userId } });
 
       if (!item) {
-
-        throw new Error('item not found')
-        
+        throw new Error('Item not found in the cart');
       }
 
-      await this.cartRepository.remove(item)
-      return {message : 'item removed form the cart'}
-      
+      await this.cartRepository.remove(item);
+      return { message: 'Item removed from the cart' };
     } catch (error) {
-      
+      console.error('Error removing item from cart:', error);
+      throw new Error('Could not remove item from cart');
     }
-
   }
-  
 }
