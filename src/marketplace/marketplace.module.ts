@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MarketplaceService } from './marketplace.service';
 import { MarketplaceController } from './marketplace.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Marketplace } from './entities/marketplace.entity';
+import { Marketplace } from '../entities/marketplace.entity';
 
 @Module({
 

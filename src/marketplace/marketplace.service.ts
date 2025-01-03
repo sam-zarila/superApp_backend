@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Marketplace } from './entities/marketplace.entity';
+import { Marketplace } from '../entities/marketplace.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

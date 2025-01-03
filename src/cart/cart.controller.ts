@@ -13,8 +13,8 @@ import {
 import { CartService } from './cart.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
-import { cartEntity } from './entities/cart.entity';
-import { FirebaseAuthGuard } from '../firebase/firebase.authGuard'; 
+import { cartEntity } from '../entities/cart.entity';
+import { FirebaseAuthGuard } from 'src/firebase/firebase.authGuard';
 
 @ApiTags('Cart APIs')
 @Controller('cart')

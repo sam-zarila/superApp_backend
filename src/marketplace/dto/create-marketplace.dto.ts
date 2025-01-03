@@ -13,4 +13,7 @@ export class CreateMarketplaceDto {
 
     @ApiProperty()
     price:number
+    
+    @ApiProperty()
+    description:string
 }
