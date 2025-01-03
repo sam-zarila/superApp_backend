@@ -25,6 +25,8 @@ import { CartModule } from './cart/cart.module';
 import { CartController } from './cart/cart.controller';
 import { cartEntity } from './entities/cart.entity';
 import { FirebaseModule } from './firebase/firebase.module';
+import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
+import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -51,7 +53,7 @@ dotenv.config();
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity],
+      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity,Latestarrival],
       synchronize: true,
     }),
 
@@ -62,7 +64,8 @@ dotenv.config();
     CartModule,
     SellersModule, // Ensure this is imported
     DriversModule,
-    FirebaseModule
+    FirebaseModule,
+    LatestarrivalsModule
   ],
   controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],
