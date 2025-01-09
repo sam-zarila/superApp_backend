@@ -13,7 +13,7 @@ export class cartEntity {
 
         @Column()
         @ApiProperty()
-        userId: string;
+        // userId: string;
 
         @Column()
         @ApiProperty()

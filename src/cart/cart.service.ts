@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { cartEntity } from '../entities/cart.entity';
 import { Repository } from 'typeorm';
@@ -13,12 +12,12 @@ export class CartService {
   ) {}
 
   // Add item to cart tied to a specific user
-  async addToCart(userId: string, addToCart: CreateCartDto): Promise<{ message: string }> {
+  async addToCart( addToCart: CreateCartDto): Promise<{ message: string }> {
     const { item, quantity, image, name, price, description } = addToCart;
 
     try {
-      // Check if the item already exists in the user's cart
-      const existingItem = await this.cartRepository.findOne({ where: { item, userId } });
+      
+      const existingItem = await this.cartRepository.findOne({ where: { item } });
 
       if (existingItem) {
         // If item exists, update quantity
@@ -27,21 +26,21 @@ export class CartService {
         return { message: 'Item quantity updated successfully' };
       }
 
-      // If item doesn't exist, create a new item
-      const newItem = this.cartRepository.create({ item, quantity, image, name, price, description, userId });
+    
+      const newItem = this.cartRepository.create({ item, quantity, image, name, price, description,  });
       await this.cartRepository.save(newItem);
       return { message: 'Item added to cart successfully' };
     } catch (error) {
-      // Handling errors with specific HTTP status codes
+      
       throw new HttpException('Could not add item to cart', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   // Get all cart items for a specific user
-  async getCartItems(userId: string): Promise<cartEntity[]> {
+  async getCartItems(): Promise<cartEntity[]> {
     try {
       // Fetch all cart items for the logged-in user
-      const cartItems = await this.cartRepository.find({ where: { userId } });
+      const cartItems = await this.cartRepository.find();
       if (!cartItems.length) {
         throw new HttpException('No items in cart', HttpStatus.NOT_FOUND);
       }
@@ -53,10 +52,10 @@ export class CartService {
   }
 
   // Remove an item from the cart
-  async deleteFromCart(userId: string, itemId: number): Promise<{ message: string }> {
+  async deleteFromCart( itemId: number): Promise<{ message: string }> {
     try {
       // Find the item by id and userId
-      const item = await this.cartRepository.findOne({ where: { id: itemId, userId } });
+      const item = await this.cartRepository.findOne({ where: { id: itemId } });
 
       if (!item) {
         throw new HttpException('Item not found in the cart', HttpStatus.NOT_FOUND);

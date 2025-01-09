@@ -5,10 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { cartEntity } from '../entities/cart.entity';
 import { AppService } from 'src/app.service';
 import { AppController } from 'src/app.controller';
-import { FirebaseModule } from 'src/firebase/firebase.module';
+// import { FirebaseModule } from 'src/firebase/firebase.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([cartEntity]),FirebaseModule],
+  imports:[TypeOrmModule.forFeature([cartEntity])],
   controllers: [CartController,AppController],
   providers: [CartService,AppService],
   exports:[CartService,AppService]

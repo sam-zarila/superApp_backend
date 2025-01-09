@@ -24,9 +24,10 @@ import { randomproductsModule } from './random products/randomproducts.modules';
 import { CartModule } from './cart/cart.module';
 import { CartController } from './cart/cart.controller';
 import { cartEntity } from './entities/cart.entity';
-import { FirebaseModule } from './firebase/firebase.module';
+// import { FirebaseModule } from './firebase/firebase.module';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
+import { AuthModule } from './auth/auth.module';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -64,8 +65,9 @@ dotenv.config();
     CartModule,
     SellersModule, // Ensure this is imported
     DriversModule,
-    FirebaseModule,
-    LatestarrivalsModule
+    // FirebaseModule,
+    LatestarrivalsModule,
+    AuthModule
   ],
   controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],

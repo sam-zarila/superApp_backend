@@ -14,20 +14,20 @@ import { CartService } from './cart.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { cartEntity } from '../entities/cart.entity';
-import { FirebaseAuthGuard } from 'src/firebase/firebase.authGuard';
+// import { FirebaseAuthGuard } from 'src/firebase/firebase.authGuard';
 
 @ApiTags('Cart APIs')
 @Controller('cart')
-@UseGuards(FirebaseAuthGuard)
+// @UseGuards(FirebaseAuthGuard)
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   // Add item to the user's cart
   @Post()
   async addToCart(@Req() request: any, @Body() addToCartDto: CreateCartDto) {
-    const userId = request.user.uid; 
+    // const userId = request.user.uid; 
     try {
-      const result = await this.cartService.addToCart(userId, addToCartDto);
+      const result = await this.cartService.addToCart( addToCartDto);
       return result;
     } catch (error) {
       throw new HttpException(
@@ -40,9 +40,9 @@ export class CartController {
   
   @Get()
   async getCartItems(@Req() request: any): Promise<cartEntity[]> {
-    const userId = request.user.uid; 
+    // const userId = request.user.uid; 
     try {
-      const cartItems = await this.cartService.getCartItems(userId);
+      const cartItems = await this.cartService.getCartItems();
       return cartItems;
     } catch (error) {
       throw new HttpException(
@@ -55,9 +55,9 @@ export class CartController {
   
   @Delete(':id')
   async deleteFromCart(@Req() request: any, @Param('id') id: number) {
-    const userId = request.user.uid; 
+    // const userId = request.user.uid; 
     try {
-      const result = await this.cartService.deleteFromCart(userId, id);
+      const result = await this.cartService.deleteFromCart( id);
       return result;
     } catch (error) {
       if (error.status === HttpStatus.NOT_FOUND) {
