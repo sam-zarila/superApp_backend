@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-// import { JwtService } from '@nestjs/jwt';
+ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/entities/user.auth_entity';
+import { JwtPayload } from 'src/jwt/payload';
 
 // import { JwtPayload } from './jwt-payload.interface';
 
@@ -39,7 +40,7 @@ export class AuthService {
 
   // Login and return JWT token
   async login(user: any) {
-    const payload: JwtPayload = { email: user.email, sub: user.id };
+    const payload: JwtPayload = { email: user.email, userId: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };

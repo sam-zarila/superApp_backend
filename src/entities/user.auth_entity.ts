@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CartEntity } from "./cart.entity";
 
 
 @Entity()
@@ -16,8 +17,12 @@ export class  User{
     @ApiProperty()
     @Column({unique: true})
     email:string;
-    
+
     @ApiProperty()
     @Column()
     password:string;
+
+    @OneToMany(()=> CartEntity, (cart)=>cart.user)
+
+    cart:CartEntity[];
 }
