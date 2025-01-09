@@ -1,3 +1,4 @@
+import { User } from 'src/entities/user.auth_entity';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -54,7 +55,7 @@ dotenv.config();
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity,Latestarrival],
+      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity,Latestarrival,User],
       synchronize: true,
     }),
 
