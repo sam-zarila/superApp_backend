@@ -9,13 +9,15 @@ export class  User{
     @PrimaryGeneratedColumn()
 
     id:number;
-
+    @ApiProperty()
     @Column()
     name:string;
-
+    
+    @ApiProperty()
     @Column({unique: true})
     email:string;
-
+    
+    @ApiProperty()
     @Column()
     password:string;
 }
