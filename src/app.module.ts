@@ -29,6 +29,7 @@ import { cartEntity } from './entities/cart.entity';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from './jwt/jwt.module';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -68,7 +69,8 @@ dotenv.config();
     DriversModule,
     // FirebaseModule,
     LatestarrivalsModule,
-    AuthModule
+    AuthModule,
+    JwtModule
   ],
   controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],
