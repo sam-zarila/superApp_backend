@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    // private jwtService: JwtService,
+     private jwtService: JwtService,
   ) {}
 
   // Register user

@@ -13,6 +13,11 @@ export class CartEntity {
   @Column()
   item: number;
 
+
+  @Column()
+  @ApiProperty()
+  userId:string
+
   @Column()
   @ApiProperty()
   quantity: number;

@@ -24,7 +24,7 @@ import { Orders } from './entities/Order.Entity';
 import { randomproductsModule } from './random products/randomproducts.modules';
 import { CartModule } from './cart/cart.module';
 import { CartController } from './cart/cart.controller';
-import { cartEntity } from './entities/cart.entity';
+import { CartEntity } from './entities/cart.entity';
 // import { FirebaseModule } from './firebase/firebase.module';
 import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
@@ -56,7 +56,7 @@ dotenv.config();
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,cartEntity,Latestarrival,User],
+      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User],
       synchronize: true,
     }),
 
