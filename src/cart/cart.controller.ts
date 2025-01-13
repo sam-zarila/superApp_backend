@@ -1,42 +1,62 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Body, 
-  Param, 
-  Delete, 
-  Req, 
-  UseGuards 
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Req,
+  UseGuards,
+  BadRequestException,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtPayload } from 'src/jwt/payload';
 
 
 @ApiTags('Cart APIs')
 @Controller('cart')
-
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  // Add item to the user's cart
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async addToCart(@Req() request: any, @Body() addToCartDto: CreateCartDto) {
-    const userId = request.user.userId; // Extract `userId` from validated JWT payload
-    return this.cartService.addToCart(userId, addToCartDto);
+      const user: JwtPayload = request.user;
+
+      if (!user || !user.userId) {
+          throw new BadRequestException('User not authenticated');
+      }
+
+      console.log('Authenticated User ID:', user.userId);
+      return this.cartService.addToCart(user.userId, addToCartDto);
   }
 
-  // Get all cart items for the authenticated user
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async getCartItems(@Req() request: any) {
-    const userId = request.user.userId;
-    return this.cartService.getCartItems(userId);
+      const user: JwtPayload = request.user;
+
+      if (!user || !user.userId) {
+          throw new BadRequestException('User not authenticated');
+      }
+
+      console.log('Fetching cart items for User ID:', user.userId);
+      return this.cartService.getCartItems(user.userId);
   }
 
-  // Remove an item from the cart
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async deleteFromCart(@Req() request: any, @Param('id') id: number) {
-    const userId = request.user.userId;
-    return this.cartService.deleteFromCart(userId, id);
+      const user: JwtPayload = request.user;
+
+      if (!user || !user.userId) {
+          throw new BadRequestException('User not authenticated');
+      }
+
+      console.log(`Deleting item with ID ${id} for User ID: ${user.userId}`);
+      return this.cartService.deleteFromCart(user.userId, id);
   }
 }
