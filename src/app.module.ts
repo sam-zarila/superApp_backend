@@ -65,9 +65,8 @@ dotenv.config();
     OrdersModule,
     randomproductsModule,
     CartModule,
-    SellersModule, // Ensure this is imported
+    SellersModule, 
     DriversModule,
-    // FirebaseModule,
     LatestarrivalsModule,
     AuthModule,
     JwtModule
