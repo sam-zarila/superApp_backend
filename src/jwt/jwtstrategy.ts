@@ -7,24 +7,15 @@ import { JwtPayload } from './payload';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      // Extract the JWT from the Authorization header as a Bearer token
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false, // Automatically reject expired tokens
-      secretOrKey: 'your-secret-key', // Use the same secret key as in the JwtModule configuration
+      ignoreExpiration: false, // Reject expired tokens
+      secretOrKey: 'your-secret-key', // Make sure this is the same secret used to sign the token
     });
   }
 
-  /**
-   * Validate method runs after decoding and validating the JWT.
-   * The returned value is attached to the `request.user` object.
-   * @param payload - Decoded JWT payload
-   * @returns A subset of the payload with essential user details
-   */
   async validate(payload: JwtPayload): Promise<JwtPayload> {
-    // Return only the relevant user information for further use
-    return {
-      userId: payload.userId,
-      email: payload.email,
-    };
+    console.log('Decoded JWT Payload:', payload); // Log the decoded payload to confirm the validity
+    return { userId: payload.userId, email: payload.email };
   }
 }
+
