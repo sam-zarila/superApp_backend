@@ -30,6 +30,8 @@ import { Latestarrival } from './latestarrivals/entities/latestarrival.entity';
 import { LatestarrivalsModule } from './latestarrivals/latestarrivals.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from './jwt/jwt.module';
+import { AccomodationModule } from './accomodation/accomodation.module';
+import { HostelsModule } from './hostels/hostels.module';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -69,7 +71,9 @@ dotenv.config();
     DriversModule,
     LatestarrivalsModule,
     AuthModule,
-    JwtModule
+    JwtModule,
+    AccomodationModule,
+    HostelsModule
   ],
   controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],
