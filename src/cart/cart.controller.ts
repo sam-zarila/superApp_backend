@@ -47,7 +47,7 @@ export class CartController {
       return this.cartService.getCartItems(user.userId);
   }
 
-//   @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async deleteFromCart(@Req() request: any, @Param('id') id: number) {
       const user: JwtPayload = request.user;
