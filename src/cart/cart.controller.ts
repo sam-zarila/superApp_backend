@@ -21,7 +21,7 @@ import { JwtPayload } from 'src/jwt/payload';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-//   @UseGuards(AuthGuard('jwt'))
+ @UseGuards(AuthGuard('jwt'))
   @Post()
   async addToCart(@Req() request: any, @Body() addToCartDto: CreateCartDto) {
       const user: JwtPayload = request.user;
@@ -34,7 +34,7 @@ export class CartController {
       return this.cartService.addToCart(user.userId, addToCartDto);
   }
 
-//   @UseGuards(AuthGuard('jwt'))
+ @UseGuards(AuthGuard('jwt'))
   @Get()
   async getCartItems(@Req() request: any) {
       const user: JwtPayload = request.user;
