@@ -1,9 +1,11 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BoardingHouse } from 'src/entities/Hostel.entity';
 import { boardingHouseDTO } from 'src/hostels/DTO/hostel.DTO';
 import { HostelsService } from 'src/hostels/services/hostels/hostels.service';
 
+
+@ApiTags('Accomodation Hostels')
 @Controller('hostels')
 export class HostelsController {
     constructor(private readonly boardingHouseService: HostelsService) {}
