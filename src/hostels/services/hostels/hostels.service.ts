@@ -1,6 +1,8 @@
+import { BoardingHouse } from './../../../entities/Hostel.entity';
+import { boardingHouseDTO } from './../../DTO/hostel.DTO';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardingHouse } from 'src/entities/Hostel.entity';
+
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,5 +12,9 @@ export class HostelsService {
         @InjectRepository(BoardingHouse) private boardingHouseRepository:Repository<BoardingHouse>,
     ){}
 
-    async createBoardingHouse(){}
+    async createBoardingHouse(boardingHouseDTO:boardingHouseDTO): Promise<BoardingHouse>{
+
+        const boardingHouse = this.boardingHouseRepository.create(boardingHouseDTO);
+        return this.boardingHouseRepository.save(boardingHouse);
+    }
 }
