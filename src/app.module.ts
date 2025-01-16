@@ -32,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from './jwt/jwt.module';
 import { AccomodationModule } from './accomodation/accomodation.module';
 import { HostelsModule } from './hostels/hostels.module';
+import { BookingRoom } from './entities/Booking.Entity';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -58,7 +59,7 @@ dotenv.config();
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User],
+      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom],
       synchronize: true,
     }),
 
