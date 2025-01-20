@@ -35,6 +35,7 @@ import { HostelsModule } from './hostels/hostels.module';
 import { BookingRoom } from './entities/Booking.Entity';
 import { BoardingHouse } from './entities/Hostel.entity';
 import { PaymentsModule } from './payments/payments.module';
+import { paymentEntity } from './entities/payment.entity';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -61,7 +62,7 @@ dotenv.config();
       username: 'root',
       password: '',
       database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom,BoardingHouse],
+      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom,BoardingHouse,paymentEntity],
       synchronize: true,
     }),
 
