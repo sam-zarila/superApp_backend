@@ -34,6 +34,7 @@ import { AccomodationModule } from './accomodation/accomodation.module';
 import { HostelsModule } from './hostels/hostels.module';
 import { BookingRoom } from './entities/Booking.Entity';
 import { BoardingHouse } from './entities/Hostel.entity';
+import { PaymentsModule } from './payments/payments.module';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -75,7 +76,8 @@ dotenv.config();
     AuthModule,
     JwtModule,
     AccomodationModule,
-    HostelsModule
+    HostelsModule,
+    PaymentsModule
   ],
   controllers: [AppController, SellersController, DriversController, OrdersController,CartController],
   providers: [AppService],
