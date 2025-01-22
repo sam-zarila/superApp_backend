@@ -1,30 +1,30 @@
+import * as dotenv from 'dotenv'; // Import dotenv to load environment variables
 import helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+// Load environment variables from the .env file
+dotenv.config();
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors(); 
-  // Swagger configuration
-
-  // Apply helmet middleware for security
+  // Enable Helmet middleware for enhanced security
   app.use(helmet());
 
-  // Enable CORS with the necessary origins
+  // Enable CORS and configure allowed origins
   app.enableCors({
     origin: [
       'http://localhost:45587',
       'http://127.0.0.1:3000',
       'http://10.0.2.2:3000',
       'http://localhost:34201',
-    , // Add your current frontend origin here
+      // Add additional frontend origins as needed
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept, Authorization',
   });
-  
 
   // Swagger setup for API documentation
   const config = new DocumentBuilder()
@@ -37,7 +37,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // Start the app on port 3000
+  // Start the application on port 3000
   await app.listen(3000);
 }
 bootstrap();

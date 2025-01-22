@@ -43,6 +43,7 @@ dotenv.config();
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ''
    }),
     // TypeOrmModule.forRoot({
     //   type: process.env.DB_TYPE as 'mysql' | 'postgres',
