@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { BookingRoom } from './Booking.Entity';
+
 import { ApiProperty } from '@nestjs/swagger';
+import { BookingRoom } from './booking.entity';
 
 @Entity()
 export class BoardingHouse {

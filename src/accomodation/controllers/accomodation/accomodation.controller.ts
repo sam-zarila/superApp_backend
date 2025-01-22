@@ -1,8 +1,9 @@
 import { AccomodationService } from './../../services/accomodation/accomodation.service';
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { BookingRoom } from 'src/entities/Booking.Entity';
+
 import { bookingdto, UpdateBookingDto, selectedDateDTO} from 'src/accomodation/DTO/bookingDTO';
+import { BookingRoom } from 'src/entities/booking.entity';
 
 
 @ApiTags('Accomadation-Booking')

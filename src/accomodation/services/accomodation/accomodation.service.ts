@@ -1,8 +1,9 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { bookingdto } from 'src/accomodation/DTO/bookingDTO';
+import { BookingRoom } from 'src/entities/booking.entity';
 
-import { BookingRoom } from 'src/Entities/Booking.Entity';
+
 import { BoardingHouse } from 'src/entities/Hostel.entity';
 import { Bookingparams } from 'src/utils/type';
 import { Between, Repository } from 'typeorm';
