@@ -41,9 +41,9 @@ import { paymentEntity } from './entities/payment.entity';
 dotenv.config();
 @Module({
   imports: [
-    // ConfigModule.forRoot({
-    //   isGlobal: true,
-    // }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+   }),
     // TypeOrmModule.forRoot({
     //   type: process.env.DB_TYPE as 'mysql' | 'postgres',
     //   host: process.env.DB_HOST,

@@ -46,7 +46,7 @@ export class PaymentsService {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        Authorization: `Bearer ${this.PAYCHANGU_API_KEY}`,
+        Authorization: `Bearer ${process.env.PAYCHANGU_API_KEY}`,
       },
     };
 
