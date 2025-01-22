@@ -63,7 +63,7 @@ export class PaymentsService {
             callback_url: 'https://your-callback-url.com/callback',
             return_url: 'https://your-return-url.com',
             currency: 'MWK',
-            email: 'bitahroberto0@gmail.com',
+            email: 'zarilasam99@gmail.com',
             description: name,
             amount: amount,
           },
