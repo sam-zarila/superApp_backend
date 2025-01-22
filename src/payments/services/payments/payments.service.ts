@@ -10,9 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class PaymentsService {
-  private PAYCHANGU_API_KEY: 'PUB-TEST-yO3LgksU27yWb3azhwf0PQCiiv2LxHdb'
   constructor(
-    private readonly httpService: HttpService, // Inject HttpService here
+    private readonly httpService: HttpService,
     @InjectRepository(BookingRoom)
     private readonly productRepository: Repository<BookingRoom>,
     @InjectRepository(paymentEntity)
@@ -42,11 +41,16 @@ export class PaymentsService {
 
     paymentsDto.tx_ref = this.generateUniqueTransactionReference();
 
+    const apiKey = process.env.PAYCHANGU_API_KEY;
+    if (!apiKey) {
+      throw new HttpException('API key not configured.', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     const options = {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        Authorization: `Bearer ${process.env.PAYCHANGU_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
       },
     };
 
@@ -56,9 +60,8 @@ export class PaymentsService {
           'https://api.paychangu.com/payment',
           {
             ...paymentsDto,
-            callback_url: `https://84bc-2c0f-ea60-200-1051-c197-df14-28f6-8625.ngrok-free.app/callback`,
-            return_url:
-              'https://84bc-2c0f-ea60-200-1051-c197-df14-28f6-8625.ngrok-free.app',
+            callback_url: 'https://your-callback-url.com/callback',
+            return_url: 'https://your-return-url.com',
             currency: 'MWK',
             email: 'bitahroberto0@gmail.com',
             description: name,
@@ -76,22 +79,33 @@ export class PaymentsService {
           data: data.data,
         };
       } else {
-        throw new Error(data.message || 'Payment initiation failed.');
+        throw new HttpException(data.message || 'Payment initiation failed.', HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       console.error('Error processing payment:', error.response?.data || error.message);
-      throw new Error(
+      throw new HttpException(
         error.response?.data?.message || 'An error occurred while processing payment.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
 
   async getPaymentStatus(tx_ref: string): Promise<any> {
+    const apiKey = process.env.PAYCHANGU_API_KEY;
+    if (!apiKey) {
+      throw new HttpException('API key not configured.', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     try {
       const response = await firstValueFrom(
-        this.httpService.get(`https://api.paychangu.com/payment/status/${tx_ref}`),
+        this.httpService.get(`https://api.paychangu.com/payment/status/${tx_ref}`, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        }),
       );
       const data = response.data;
+
       if (data.status === 'success') {
         return {
           statusCode: 200,
@@ -99,24 +113,29 @@ export class PaymentsService {
           data: data.data,
         };
       } else {
-        throw new Error(data.message || 'Failed to retrieve payment status.');
+        throw new HttpException(data.message || 'Failed to retrieve payment status.', HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       console.error('Error retrieving payment status:', error.response?.data || error.message);
-      throw new Error(
-        error.response?.data?.message ||
-          'An error occurred while retrieving payment status.',
+      throw new HttpException(
+        error.response?.data?.message || 'An error occurred while retrieving payment status.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
 
   async verifyPayment(tx_ref: string): Promise<any> {
+    const apiKey = process.env.PAYCHANGU_API_KEY;
+    if (!apiKey) {
+      throw new HttpException('API key not configured.', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     try {
       const response = await firstValueFrom(
         this.httpService.get(`https://api.paychangu.com/verify-payment/${tx_ref}`, {
           headers: {
+            Authorization: `Bearer ${apiKey}`,
             Accept: 'application/json',
-            Authorization: `Bearer ${process.env.PAYCHANGU_API_KEY}`,
           },
         }),
       );
@@ -124,18 +143,13 @@ export class PaymentsService {
       const data = response.data;
 
       if (data.status === 'success') {
-        const paymentDetails = data.data;
-
         return {
           statusCode: 200,
           message: 'Payment verified successfully.',
-          data: paymentDetails,
+          data: data.data,
         };
       } else {
-        throw new HttpException(
-          data.message || 'Payment verification failed.',
-          HttpStatus.BAD_REQUEST,
-        );
+        throw new HttpException(data.message || 'Payment verification failed.', HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       console.error('Error verifying payment:', error.response?.data || error.message);
@@ -150,6 +164,11 @@ export class PaymentsService {
     const mobileMoneyOperatorRefId = this.getMobileMoneyOperatorRefId(phoneNumber);
     const chargeId = this.generateUniqueTransactionReference();
 
+    const apiKey = process.env.PAYCHANGU_API_KEY;
+    if (!apiKey) {
+      throw new HttpException('API key not configured.', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     try {
       const response = await firstValueFrom(
         this.httpService.post(
@@ -162,7 +181,7 @@ export class PaymentsService {
           },
           {
             headers: {
-              Authorization: `Bearer ${process.env.PAYCHANGU_API_KEY}`,
+              Authorization: `Bearer ${apiKey}`,
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
@@ -177,10 +196,7 @@ export class PaymentsService {
           data: response.data.data,
         };
       } else {
-        throw new HttpException(
-          'Failed to initiate mobile money payout.',
-          HttpStatus.BAD_REQUEST,
-        );
+        throw new HttpException('Failed to initiate mobile money payout.', HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       console.error('Error initiating payout:', error.response?.data || error.message);
