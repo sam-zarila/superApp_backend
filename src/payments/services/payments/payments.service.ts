@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class PaymentsService {
+  private PAYCHANGU_API_KEY: 'PUB-TEST-yO3LgksU27yWb3azhwf0PQCiiv2LxHdb'
   constructor(
     private readonly httpService: HttpService, // Inject HttpService here
     @InjectRepository(BookingRoom)
@@ -45,7 +46,7 @@ export class PaymentsService {
       headers: {
         accept: 'application/json',
         'content-type': 'application/json',
-        Authorization: `Bearer ${process.env.PAYCHANGU_API_KEY}`,
+        Authorization: `Bearer ${this.PAYCHANGU_API_KEY}`,
       },
     };
 
