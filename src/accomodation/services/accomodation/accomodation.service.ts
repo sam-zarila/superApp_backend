@@ -100,7 +100,7 @@ export class AccomodationService {
     return booking;
   }
 
-   async generateCheckoutUrl(booking: BookingRoom): Promise<string> {
+   async generateCheckoutUrl(amount: number, description: string, booking: BookingRoom): Promise<string> {
     const apiKey = process.env.PAYCHANGU_API_KEY;
 
     try {

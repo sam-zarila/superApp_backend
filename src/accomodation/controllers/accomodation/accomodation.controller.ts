@@ -93,16 +93,16 @@ export class AccomodationController {
   async generateCheckoutUrl(
     @Body('amount') amount: number,
     @Body('description') description: string,
+    @Body() booking:BookingRoom
   ): Promise<{ checkoutUrl: string }> {
     try {
-      const checkoutUrl = await this.bookingService.generateCheckoutUrl(amount, description);
+      const checkoutUrl = await this.bookingService.generateCheckoutUrl(amount, description,booking);
       return { checkoutUrl };
     } catch (error) {
       console.error('Error generating checkout URL:', error);
       return {
         checkoutUrl: '',
-        message: 'Failed to generate checkout URL.',
-        error: error.message,
+        
       };
     }
   }
