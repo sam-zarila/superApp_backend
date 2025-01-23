@@ -27,7 +27,7 @@ export class AccomodationService {
 
     while (!isUnique) {
       const randomNumber = Math.floor(10000 + Math.random() * 90000); // Generate random number
-      BookingNumber = `Silverest${randomNumber}`;
+      BookingNumber = `booking${randomNumber}`;
 
       // Check for uniqueness
       const existingBooking = await this.bookingRoomRepository.findOne({
@@ -100,12 +100,12 @@ export class AccomodationService {
     return booking;
   }
 
-  private async generateCheckoutUrl(booking: BookingRoom): Promise<string> {
+   async generateCheckoutUrl(booking: BookingRoom): Promise<string> {
     const apiKey = process.env.PAYCHANGU_API_KEY;
 
     try {
       const response = await axios.post(
-        'https://api.paychangu.com/payment', // Replace with the actual PayChangu API endpoint
+        'https://api.paychangu.com/payment', 
         {
           amount: booking.bookingFee,
           currency: 'MWK',
@@ -120,13 +120,13 @@ export class AccomodationService {
         },
         {
           headers: {
-            Authorization: `Bearer YOUR_PAYCHANGU_API_KEY`, // Replace with your PayChangu API key
+            Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
           },
         },
       );
 
-      return response.data.checkout_url; // Adjust based on the actual API response
+      return response.data.checkout_url; 
     } catch (error) {
       console.error('Failed to generate checkout URL:', error.message);
       throw new Error('Failed to generate checkout URL.');
