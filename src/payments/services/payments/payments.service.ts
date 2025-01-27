@@ -2,11 +2,12 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { BookingRoom } from 'src/Entities/Booking.Entity';
+
 import { paymentEntity } from 'src/entities/payment.entity';
 import { PaymentsDto } from 'src/payments/dto/paymentDto';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { BookingRoom } from 'src/entities/booking.entity';
 
 @Injectable()
 export class PaymentsService {

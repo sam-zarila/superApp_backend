@@ -32,10 +32,11 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from './jwt/jwt.module';
 import { AccomodationModule } from './accomodation/accomodation.module';
 import { HostelsModule } from './hostels/hostels.module';
-import { BookingRoom } from './entities/Booking.Entity';
+
 import { BoardingHouse } from './entities/Hostel.entity';
 import { PaymentsModule } from './payments/payments.module';
 import { paymentEntity } from './entities/payment.entity';
+import { BookingRoom } from './entities/booking.entity';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -45,27 +46,27 @@ dotenv.config();
       isGlobal: true,
       envFilePath: ''
    }),
-    // TypeOrmModule.forRoot({
-    //   type: process.env.DB_TYPE as 'mysql' | 'postgres',
-    //   host: process.env.DB_HOST,
-    //   port: +process.env.DB_PORT,
-    //   url:'postgres://iamjxuay:zkxIi10A55LVmiMhgUvetHsZAGelXQlN@lallah.db.elephantsql.com/iamjxuay',
-    //   username: process.env.DB_USERNAME,
-    //   password: process.env.DB_PASSWORD,
-    //   database: process.env.DB_DATABASE,
-    //   entities: [Marketplace, SellersApplicationForm, Orders,cartEntity],
-    //   synchronize: true,
-    // }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'superapp_database',
+      type: process.env.DB_TYPE as 'mysql' | 'postgres',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      url:'postgres://iamjxuay:zkxIi10A55LVmiMhgUvetHsZAGelXQlN@lallah.db.elephantsql.com/iamjxuay',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom,BoardingHouse,paymentEntity],
       synchronize: true,
     }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: '',
+    //   database: 'superapp_database',
+    //   entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom,BoardingHouse,paymentEntity],
+    //   synchronize: true,
+    // }),
 
 
     MarketplaceModule,
