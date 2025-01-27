@@ -15,15 +15,10 @@ async function bootstrap() {
 
   // Enable CORS and configure allowed origins
   app.enableCors({
-    origin: [
-      'http://localhost:45587',
-      'http://127.0.0.1:3000',
-      'http://10.0.2.2:3000',
-      'http://localhost:34201',
-      // Add additional frontend origins as needed
-    ],
+     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept, Authorization',
+    credentials: true, // Allow cookies or authentication credentials
   });
 
   // Swagger setup for API documentation
@@ -31,13 +26,17 @@ async function bootstrap() {
     .setTitle('uniConnectMalawi')
     .setDescription('APIs for university business connections')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth() // Add Bearer Authentication to Swagger
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // Start the application on port 3000
-  await app.listen(3000);
+  // Log the running port
+  const PORT = process.env.PORT || 3000;
+  console.log(`Application is running on: http://localhost:${PORT}`);
+
+  // Start the application
+  await app.listen(PORT);
 }
 bootstrap();
