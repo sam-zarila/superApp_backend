@@ -38,6 +38,7 @@ export class PaymentsService {
     return refId;
   }
 
+  // generating unique transaction identifier
   private generateUniqueTransactionReference(): string {
     return uuidv4();
   }
