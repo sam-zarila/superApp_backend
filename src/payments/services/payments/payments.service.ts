@@ -98,6 +98,7 @@ export class PaymentsService {
     }
   }
 
+  // getting payment status
   async getPaymentStatus(tx_ref: string): Promise<any> {
     const apiKey = process.env.PAYCHANGU_API_KEY;
     if (!apiKey) {
