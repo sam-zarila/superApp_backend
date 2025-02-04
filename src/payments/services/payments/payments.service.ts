@@ -68,7 +68,7 @@ export class PaymentsService {
           'https://api.paychangu.com/payment',
           {
             ...paymentsDto,
-            callback_url: 'https://your-callback-url.com/callback',
+            callback_url: 'https://your-callback-url.com/callback',// i need to create a callback URL here
             return_url: 'https://your-return-url.com',
             currency: 'MWK',
             email: 'zarilasam99@gmail.com',
