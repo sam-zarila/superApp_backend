@@ -43,6 +43,7 @@ export class PaymentsService {
     return uuidv4();
   }
 
+  // processing payments
   async processPayment(paymentsDto: PaymentsDto): Promise<any> {
     const { amount, name } = paymentsDto;
 
