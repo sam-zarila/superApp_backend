@@ -133,6 +133,7 @@ export class PaymentsService {
     }
   }
 
+  // verify the payment status via the phone PIN
   async verifyPayment(tx_ref: string): Promise<any> {
     const apiKey = process.env.PAYCHANGU_API_KEY;
     if (!apiKey) {
