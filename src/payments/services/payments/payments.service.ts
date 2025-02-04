@@ -170,6 +170,7 @@ export class PaymentsService {
     }
   }
 
+  // initialize payout
   async initiatePayout(phoneNumber: string, amount: string): Promise<any> {
     const mobileMoneyOperatorRefId = this.getMobileMoneyOperatorRefId(phoneNumber);
     const chargeId = this.generateUniqueTransactionReference();
