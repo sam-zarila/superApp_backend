@@ -21,6 +21,8 @@ export class PaymentsService {
     private readonly paymentRepository: Repository<paymentEntity>,
   ) {}
 
+  // tnm and airtel ids
+
   private readonly operatorRefIds = {
     '8': '27494cb5-ba9e-437f-a114-4e7a7686bcca',
     '9': '20be6c20-adeb-4b5b-a7ba-0769820df4fb',
