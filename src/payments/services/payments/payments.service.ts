@@ -28,6 +28,7 @@ export class PaymentsService {
     '9': '20be6c20-adeb-4b5b-a7ba-0769820df4fb',
   };
 
+  // method for generating mobile operators
   private getMobileMoneyOperatorRefId(mobile: string): string {
     const prefix = mobile.charAt(0);
     const refId = this.operatorRefIds[prefix];
