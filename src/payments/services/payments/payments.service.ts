@@ -12,6 +12,8 @@ import { BookingRoom } from 'src/entities/booking.entity';
 @Injectable()
 export class PaymentsService {
   constructor(
+
+    // injecting entities
     private readonly httpService: HttpService,
     @InjectRepository(BookingRoom)
     private readonly productRepository: Repository<BookingRoom>,
