@@ -12,7 +12,7 @@ import {
 import { CartService } from './cart.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
-import FirebaseAuthGuard from 'src/firebase/firebase-auth.guard';  // Firebase Auth Guard import
+import { FirebaseAuthGuard } from 'src/firebase/firebase-auth.guard';
 
 @ApiTags('Cart APIs') 
 @ApiBearerAuth() 
