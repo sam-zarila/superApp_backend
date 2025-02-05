@@ -59,14 +59,25 @@ dotenv.config();
     // // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'superapp_database',
-      entities: [Marketplace, SellersApplicationForm, Orders,CartEntity,Latestarrival,User,BookingRoom,BoardingHouse,paymentEntity],
-      synchronize: true,
+      host: 'sql101.infinityfree.com',   // InfinityFree host
+      port: 3306,                        // MySQL default port
+      username: 'if0_38245928',          // Your InfinityFree MySQL username
+      password: 'troxtrox265',    // Your InfinityFree MySQL password
+      database: 'if0_38245928_superapp_database', // Choose the intended database
+      entities: [
+        Marketplace, 
+        SellersApplicationForm, 
+        Orders,
+        CartEntity,
+        Latestarrival,
+        User,
+        BookingRoom,
+        BoardingHouse,
+        paymentEntity
+      ],
+      synchronize: true, // Be cautious using this in production!
     }),
+    
 
 
     MarketplaceModule,
