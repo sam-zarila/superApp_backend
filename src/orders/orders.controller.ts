@@ -5,17 +5,17 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Response } from 'express';
 import { Orders } from 'src/entities/Order.Entity';
-import { CreateOrderDto, selectedDateDTO, UpdateOrderDto } from './DTO/Order.dto';
+import { CreateOrderDto, selectedDateDTO, UpdateOrderDto } from './DTO/FoodOrder.dto';
 
 
 
 @Controller('orders')
-@ApiTags("ORDERS")
+@ApiTags("RESTRAUNT ORDERS")
 export class OrdersController {
   constructor(private ordersService: OrdersService) { }
 
 
-  @Post('/add')
+  @Post()
   @ApiOperation({ summary: 'create a new order ' })
   @ApiResponse({ status: 201, description: 'New Order created successfully' })
   async createNewOrder (@Body() OrderDTO: CreateOrderDto) {
@@ -63,7 +63,7 @@ export class OrdersController {
 
 
 
-  @Get('/allorders')
+  @Get('')
   @ApiOperation({ summary: 'Get all orders' })
   @ApiResponse({ status: 200, description:'return all orders' })
   async GetAllOrders() {

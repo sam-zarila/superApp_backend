@@ -1,12 +1,15 @@
 export type orderparams={
+    FoodImage:string;
     OrderNumber:string;
     CustomerName:string;
-    ProductName:string;
+    RestrauntName:string
+    FoodName:string;
     Price:string;
     Quantity:number;
     Description:string;
-    Location:string;
-    PhoneNumber:string;
+    CustomerLocation:string;
+    CustomerPhoneNumber:string;
+    RestrauntPhoneNumber: string;
     OrderDate:Date;
   
 
