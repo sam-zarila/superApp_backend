@@ -23,7 +23,7 @@ export class BookingRoom {
   @Column()
   price: number;
 
-  @Column()
+  @Column({nullable:true})
   bookingFee: number;
 
   @ManyToOne(() => BoardingHouse, (boardingHouse) => boardingHouse.bookings, {
