@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Between, Repository } from 'typeorm';
-import { CreateOrderDto } from './DTO/Order.dto';
+import { CreateOrderDto } from './DTO/FoodOrder.dto';
 import { UpdateOrderParams } from './Utils/types';
 import { Response } from 'express';
 import { Orders } from 'src/entities/Order.Entity';

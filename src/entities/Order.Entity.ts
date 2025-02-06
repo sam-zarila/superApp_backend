@@ -6,26 +6,36 @@ export class Orders {
     @PrimaryGeneratedColumn()
     ID: number;
 
+
+    @Column({ nullable: false})
+    @IsString({ message: 'image of food' })
+    FoodImage:string;
+
     @Column({ nullable: false, unique: true })
     @IsString({ message: 'Order number must be a string' })
     OrderNumber: string;
+
+
+    @Column({ nullable: false, unique: true})
+    @IsString({ message: 'name of restraunt' })
+    RestrauntName: string;
 
     @Column({ nullable: false })
     @IsString({ message: 'Customer name must be a string' })
     CustomerName: string;
 
     @Column({ nullable: false })
-    @IsString({ message: 'Product name must be a string' })
-    ProductName: string;
+    @IsString({ message: 'food name must be a string' })
+    FoodName: string;
 
     @Column({ type: 'decimal', nullable: false })  // Specify the type correctly
     @IsNotEmpty({ message: 'Price cannot be empty' })
-    @IsNumber({}, { message: 'Price must be a number' })  // Add empty object to IsNumber for proper validation
+    @IsNumber({}, { message: 'Price must be a number' })  
     Price: number;
 
     @Column({ nullable: false })
     @IsNotEmpty({ message: 'Quantity cannot be empty' })
-    @IsNumber({}, { message: 'Quantity must be a number' })  // Add empty object to IsNumber for proper validation
+    @IsNumber({}, { message: 'Quantity must be a number' })  
     Quantity: number;
 
     @Column({ nullable: true })
@@ -34,11 +44,17 @@ export class Orders {
 
     @Column({ nullable: false })
     @IsString({ message: 'Location must be a string' })
-    Location: string;
+    CustomerLocation: string;
 
     @Column({ nullable: false })
     @IsString({ message: 'Phone number must be a string' })
-    PhoneNumber: string;
+    CustomerPhoneNumber: string;
+
+    @Column({ nullable: false })
+    @IsString({ message: 'Phone number must be a string' })
+    RestrauntPhoneNumber: string;
+
+
 
     @Column({ type: 'timestamp', nullable: false })  // Specify the type for OrderDate
     @IsNotEmpty({ message: 'Order date cannot be empty' })

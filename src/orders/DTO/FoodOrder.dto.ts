@@ -3,23 +3,35 @@ import { IsDateString, IsNotEmpty, IsString } from "class-validator";
 
 export class  CreateOrderDto{
     ID:number;
-
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
 
+
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty()
+    RestrauntName:string
     
  OrderNumber:string;
  @IsNotEmpty()
  @IsString()
  @ApiProperty()
-    CustomerName:string;
+   
+ @IsNotEmpty()
+ @IsString()
+ @ApiProperty()
+ CustomerName:string;
 
+ @IsNotEmpty()
+ @ApiProperty()
+ @IsString({ message: 'image of food' })
+ FoodImage:string;
 
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    ProductName:string;
+    FoodName:string;
 
 
     @IsNotEmpty()
@@ -43,13 +55,18 @@ export class  CreateOrderDto{
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    Location:string;
+    CustomerLocation:string;
+
+    @IsString({ message: 'Phone number must be a string' })
+    @ApiProperty()
+    @IsNotEmpty()
+    RestrauntPhoneNumber: string;
 
 
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    PhoneNumber:string;
+    CustomerPhoneNumber:string;
 
     @IsNotEmpty()
     @IsString()
@@ -58,6 +75,12 @@ export class  CreateOrderDto{
 
 
 }
+
+
+
+
+
+
 
 
 export class UpdateOrderDto{
@@ -71,7 +94,7 @@ export class UpdateOrderDto{
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    ProductName:string;
+    FoodName:string;
 
 
     @IsNotEmpty()
@@ -87,12 +110,12 @@ export class UpdateOrderDto{
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    Location:string;
+    CustomerLocation:string;
 
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
-    PhoneNumber:string;
+    CustomerPhoneNumber:string;
 
    
 
@@ -104,7 +127,14 @@ export class UpdateOrderDto{
 
 
 
+
+
+
+
+
 export class selectedDateDTO {
     @IsDateString()
     OrderDate: string;
   }
+
+ 
