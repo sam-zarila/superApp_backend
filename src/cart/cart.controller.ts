@@ -12,53 +12,49 @@ import {
 import { CartService } from './cart.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateCartDto } from './dto/create-cart.dto';
-import { FirebaseAuthGuard } from 'src/firebase/firebase-auth.guard';
+import { JwtAuthGuard } from 'src/jwt/jwtAuthguard';
 
-@ApiTags('Cart APIs') 
-@ApiBearerAuth() 
+@ApiTags('Cart APIs')
+@ApiBearerAuth()
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @UseGuards(FirebaseAuthGuard) // Firebase Authentication Guard
+  @UseGuards(JwtAuthGuard)
   @Post()
   async addToCart(@Req() request: any, @Body() addToCartDto: CreateCartDto) {
-    const user = request.user; // Firebase `uid` extracted from the request
+    const user = request.user; // Extracted from the JWT payload
 
-    // Check if the user is authenticated
-    if (!user || !user.uid) {
+    // Check if the user is authenticated by verifying the existence of userId
+    if (!user || !user.userId) {
       throw new BadRequestException('User not authenticated');
     }
 
-    // Call service to add item to the cart using Firebase UID
-    return this.cartService.addToCart(user.uid, addToCartDto);
+    // Use the authenticated user's userId to add the item to their cart
+    return this.cartService.addToCart(user.userId, addToCartDto);
   }
 
-  @UseGuards(FirebaseAuthGuard) // Firebase Authentication Guard
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getCartItems(@Req() request: any) {
     const user = request.user;
 
-    // Check if the user is authenticated
-    if (!user || !user.uid) {
+    if (!user || !user.userId) {
       throw new BadRequestException('User not authenticated');
     }
 
-    // Call service to get items in the cart using Firebase UID
-    return this.cartService.getCartItems(user.uid);
+    return this.cartService.getCartItems(user.userId);
   }
 
-  @UseGuards(FirebaseAuthGuard) // Firebase Authentication Guard
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteFromCart(@Req() request: any, @Param('id') id: number) {
     const user = request.user;
 
-    // Check if the user is authenticated
-    if (!user || !user.uid) {
+    if (!user || !user.userId) {
       throw new BadRequestException('User not authenticated');
     }
 
-    // Call service to delete item from cart using Firebase UID
-    return this.cartService.deleteFromCart(user.uid, id);
+    return this.cartService.deleteFromCart(user.userId, id);
   }
 }

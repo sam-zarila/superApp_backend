@@ -6,7 +6,7 @@ import { JwtStrategy } from './jwtstrategy';
   imports: [
     
     NestJwtModule.register({
-      secret: 'your-secret-key', // Hardcoded secret key
+      secret: 'superapp', // Hardcoded secret key
       signOptions: { expiresIn: '1h' }, // Token expiration time
     }),
   ],

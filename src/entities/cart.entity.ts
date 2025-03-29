@@ -3,7 +3,6 @@ import { IsNumber, IsString } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './user.auth_entity';
 
-
 @Entity()
 export class CartEntity {
   @ApiProperty({ description: 'Unique description of the entity' })
@@ -12,11 +11,6 @@ export class CartEntity {
 
   @Column()
   item: number;
-
-
-  @Column()
-  @ApiProperty()
-  userId:string
 
   @Column()
   @ApiProperty()
@@ -42,9 +36,9 @@ export class CartEntity {
   @IsString()
   description: string;
 
-  // Define a ManyToOne relationship with the User entity
-  @ManyToOne(() => User, (user) => user.cart) // This assumes a `cart` property exists on the `User` entity
-  @JoinColumn({ name: 'userId' }) // This specifies the column name in the database
+  // Use the relation to manage the foreign key
+  @ManyToOne(() => User, (user) => user.cart, { nullable: true})
+  @JoinColumn({ name: 'userId' })
   @ApiProperty({ description: 'User who owns this cart' })
   user: User;
 }

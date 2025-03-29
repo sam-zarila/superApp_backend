@@ -43,7 +43,7 @@ export class AuthService {
     const payload: JwtPayload = { email: user.email, userId: user.id };
     return {
       access_token: this.jwtService.sign(payload),
-      secret: 'your-secret-key',
+      secret: 'superapp',
     };
   }
 }

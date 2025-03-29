@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false, // Reject expired tokens
-      secretOrKey: 'your-secret-key', // Make sure this is the same secret used to sign the token
+      secretOrKey: 'superapp', // Make sure this is the same secret used to sign the token
     });
   }
 
